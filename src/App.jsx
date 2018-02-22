@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
-const App = () =>
+const App = () => (
   <Router>
     <div className="app">
       <Switch>
@@ -12,6 +12,7 @@ const App = () =>
         <Route path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
-  </Router>;
+  </Router>
+);
 
 export default App;

@@ -1,11 +1,14 @@
 import firebase from 'firebase';
 
 var config = {
-  //COPY YOUR API HERE
+  apiKey: 'AIzaSyAN4EeBEOJ4qpb1uHJrg2D7wPohjsKtao4',
+  authDomain: 'authentication-86805.firebaseapp.com',
+  databaseURL: 'https://authentication-86805.firebaseio.com',
+  projectId: 'authentication-86805',
+  storageBucket: 'authentication-86805.appspot.com',
+  messagingSenderId: '1025512692174'
 };
 
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
-export const fb = new firebase.auth.FacebookAuthProvider();
-export const db = firebase.database();

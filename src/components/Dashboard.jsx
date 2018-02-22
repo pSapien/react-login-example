@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import api from '../services/auth';
 
 class Dashboard extends Component {
-  state = { redirectTo: false, loggedIn: true };
+  state = { redirectTo: false, loggedIn: true, loading: false };
 
   componentDidMount() {
     const { loggedIn } = this.state;
@@ -16,19 +17,31 @@ class Dashboard extends Component {
     }
   }
 
-  handleLogout = event => {
+  handleLogout = async event => {
     event.preventDefault();
-    this.setState({ redirectTo: '/', loggedIn: false });
+
+    try {
+      const response = await api.logout();
+      api.logout().then(response => console.log(response));
+      console.log(response);
+      if (response) {
+        this.setState({ redirectTo: '/', loggedIn: false, loading: true });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
     const { redirectTo } = this.state;
+
     if (redirectTo) {
       return <Redirect push to={redirectTo} />;
     }
+
     return (
       <button className="button" onClick={this.handleLogout}>
-        LogOut
+        LOGOUT
       </button>
     );
   }
