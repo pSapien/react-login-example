@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import api from '../services/auth';
 
-class Dashboard extends Component {
-  state = { redirectTo: false, loggedIn: true, loading: false };
+export default class Dashboard extends Component {
+  state = { redirectTo: '', loggedIn: true, loading: false };
 
   componentDidMount() {
     const { loggedIn } = this.state;
@@ -17,19 +17,13 @@ class Dashboard extends Component {
     }
   }
 
-  handleLogout = async event => {
+  handleLogout = event => {
     event.preventDefault();
 
-    try {
-      const response = await api.logout();
-      api.logout().then(response => console.log(response));
-      console.log(response);
-      if (response) {
-        this.setState({ redirectTo: '/', loggedIn: false, loading: true });
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    api
+      .logout()
+      .then(() => this.setState({ redirectTo: '/', loggedIn: false, loading: true }))
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -46,5 +40,3 @@ class Dashboard extends Component {
     );
   }
 }
-
-export default Dashboard;
