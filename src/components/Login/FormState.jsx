@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
 import isEmail from 'validator/lib/isEmail';
+import PropTypes from 'prop-types';
+
 import './login.css';
 
 export default class FormState extends Component {
+  static PropTypes = {
+    submit: PropTypes.func.isRequired,
+    buttonText: PropTypes.string.isRequired,
+    loadingButtonTextIndicator: PropTypes.string.isRequired,
+  }
+
   state = {
     data: {
       email: '',
